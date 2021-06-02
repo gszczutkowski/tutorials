@@ -11,6 +11,7 @@
     <modules>
         <module>allure-integration</module>
         <module>resources-management</module>
+        <module>logging</module>
     </modules>
 
     <properties>

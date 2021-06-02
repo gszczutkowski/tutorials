@@ -1,6 +1,7 @@
 package com.testcraftsmanship.resourcesmanagement;
 
 import com.testcraftsmanship.resourcesmanagement.resources.ResourcesManager;
+import com.testcraftsmanship.resourcesmanagement.resources.TestDataCreator;
 import com.testcraftsmanship.resourcesmanagement.resources.items.CognitoUser;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -8,13 +9,13 @@ import org.junit.jupiter.api.TestInfo;
 
 import java.util.*;
 
-public class BaseTest {
+public class BaseTest implements TestDataCreator {
     private static final String REMAINING_USERS_KEY = "testNameNotAccessible";
     private static final String CLASS_NAME_FOLLOWING_TEST_NAME_IN_STACK_TRACE = "jdk.internal.reflect.NativeMethodAccessorImpl";
     private static Map<String, List<CognitoUser>> usersUsedInTestCase = new HashMap<>();
 
     @AfterEach
-    void cleanUp(TestInfo testInfo){
+    public void cleanUp(TestInfo testInfo){
         if (testInfo.getTestMethod().isPresent()) {
             final String testMethodName = testInfo.getTestMethod().get().getName();
             cleanUpUsersCreatedWhileTestCase(testMethodName);
@@ -22,11 +23,11 @@ public class BaseTest {
     }
 
     @AfterAll
-    static void cleanUp() {
+    public static void cleanUp() {
         cleanUpUsersCreatedWhileTestCase(REMAINING_USERS_KEY);
     }
 
-    CognitoUser createTestPreconditions() {
+    public CognitoUser setUpPredefinedUser() {
         CognitoUser user = ResourcesManager.getResourcesManager().reserveUser();
         final String testMethodName = extractTestMethodName();
         List<CognitoUser> usersPerTest;

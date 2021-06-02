@@ -11,19 +11,18 @@ public class ResourcesManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(ResourcesManager.class);
     private Set<CognitoUser> availableCognitoUsers;
     private static ResourcesManager instance;
-    private static final Object USERS_LIST_LOCK = new Object();
     private static final int USER_AVAILABILITY_TIMEOUT_IN_SECONDS = 30;
     private static final int USER_AVAILABILITY_POOLING_IN_SECONDS = 1;
     private static final int MILLISECONDS_IN_SECOND = 1000;
     public static final Set<CognitoUser> COGNITO_USERS = Set.of(
-            new CognitoUser("Hagas", "Sylvyre"),
-            new CognitoUser("Flinar", "Theynore"),
-            new CognitoUser("Felaern", "Cailee"),
-            new CognitoUser("Elpharae", "Ianvaris"),
-            new CognitoUser("Elandorr", "Ulaynore")
+            new CognitoUser("Khouthoum", "Dragondigger"),
+            new CognitoUser("Grusgrul", "Duskshield"),
+            new CognitoUser("Kheznaelynn", "Heavyfury"),
+            new CognitoUser("Falael", "Wranvaris"),
+            new CognitoUser("Kellam", "Ergwyn")
     );
 
-    public ResourcesManager() {
+    private ResourcesManager() {
         this.availableCognitoUsers = new HashSet<>(COGNITO_USERS);
     }
 
@@ -43,32 +42,28 @@ public class ResourcesManager {
             }
             wait(USER_AVAILABILITY_POOLING_IN_SECONDS);
         }
-        throw new ResourceNotAvailableException("There are no available cognito user to get");
+        throw new ResourceNotAvailableException("There is no available user to get");
     }
 
-    public void releaseUsers(Collection<CognitoUser> users) {
-        synchronized (USERS_LIST_LOCK) {
-            for (CognitoUser user : users) {
-                if (COGNITO_USERS.contains(user)) {
-                    availableCognitoUsers.add(user);
-                } else {
-                    LOGGER.warn("Unable to release user {}", user);
-                }
-                LOGGER.info("Released user: {}", user);
+    public synchronized void releaseUsers(Collection<CognitoUser> users) {
+        for (CognitoUser user : users) {
+            if (COGNITO_USERS.contains(user)) {
+                availableCognitoUsers.add(user);
+            } else {
+                LOGGER.warn("Unable to release user {}", user);
             }
+            LOGGER.info("Released user: {}", user);
         }
     }
 
-    private Optional<CognitoUser> getFirstAvailableUser() {
-        synchronized (USERS_LIST_LOCK) {
-            if (availableCognitoUsers.isEmpty()) {
-                return Optional.empty();
-            }
-            CognitoUser user = availableCognitoUsers.iterator().next();
-            availableCognitoUsers.remove(user);
-            LOGGER.info("Reserved user: {}", user);
-            return Optional.of(user);
+    private synchronized Optional<CognitoUser> getFirstAvailableUser() {
+        if (availableCognitoUsers.isEmpty()) {
+            return Optional.empty();
         }
+        CognitoUser user = availableCognitoUsers.iterator().next();
+        availableCognitoUsers.remove(user);
+        LOGGER.info("Reserved user: {}", user);
+        return Optional.of(user);
     }
 
     private void wait(int seconds) {
