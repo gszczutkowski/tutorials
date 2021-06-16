@@ -4,18 +4,33 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>com.testcraftsmanship</groupId>
     <artifactId>tutorials</artifactId>
-    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
     <modules>
         <module>allure-integration</module>
+        <module>client-side-cert</module>
     </modules>
 
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.10</maven.compiler.source>
+        <maven.compiler.target>1.10</maven.compiler.target>
+
+        <plugin.surefire.version>2.22.2</plugin.surefire.version>
+        <plugin.allure.version>2.10.0</plugin.allure.version>
 
         <aspectj.version>1.9.4</aspectj.version>
+
+        <slf4j.version>1.7.30</slf4j.version>
+        <assertj.version>3.16.1</assertj.version>
+
+        <junit.version>4.12</junit.version>
+        <junit.dataprovider.version>1.13.1</junit.dataprovider.version>
+        <allure.junit>2.13.1</allure.junit>
+        <guava.version>22.0</guava.version>
+        <selenium.version>3.141.59</selenium.version>
+        <webdriver.manager.version>4.4.3</webdriver.manager.version>
     </properties>
 </project>
