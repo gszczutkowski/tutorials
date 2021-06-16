@@ -1,0 +1,62 @@
+#page-heading {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-family: Impact;
+}
+
+#page-content {
+    display: none;
+}
+
+.logo {
+    margin-top: -10px;
+    padding: 0 10px;
+    }
+
+.row {
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.modal-body {
+    text-align: justify;
+}
+
+.right {
+    float: right;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.panel-heading div {
+    margin-top: -18px;
+    font-size: 15px;
+}
+
+.panel-heading div span {
+    margin-left: 5px;
+}
+
+.filtered-table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+}
+
+.filtered-table th, .filtered-table td {
+    text-align: left;
+    padding: 12px;
+}
+
+.filtered-table tr {
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.filtered-table tr.header, .filtered-table tr:hover {
+    background-color: #f1f1f1;
+}

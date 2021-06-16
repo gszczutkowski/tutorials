@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Selenium playground</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Grzegorz Szczutkowski">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/filtered-table.css">
+    <link rel="stylesheet" href="css/general.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <!--Navbar-->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar-collapse-list" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="page-brand" class="navbar-brand" href="#">
+                    <img id="page-brand-logo" class="logo" src="img/test-craftsmanship-logo.png" alt="Test Craftsmanship">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="navbar-collapse-list" class="collapse navbar-collapse">
+                <ul id="navbar-list" class="nav navbar-nav">
+                    <li id="navbar-item-home" class="active"><a href="index.html">Home <span
+                            class="sr-only">(current)</span></a></li>
+                    <li id="navbar-item-delays"><a href="delays.html">Delays</a></li>
+                    <li id="navbar-item-actions" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Actions <span class="caret"></span></a>
+                        <ul id="navbar-item-actions-dropdown" class="dropdown-menu">
+                            <li id="navbar-item-action-wait-for-alert">
+                                <a href="" onclick="showAlertAfterRandomTime();return false;">Append banner</a>
+                            </li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <br><br><br>
+                <div id="append-banner-after"></div>
+
+                <div class="row panel panel-success">
+                    <div class="col-md-12">
+                        <h1 id="page-heading">
+                            <a id="page-heading-title">Selenium playground</a>
+                            <a id="page-heading-timer" class="right"></a>
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row panel panel-success">
+                    <div class="col-sm-6">
+                        <!-- Button triggering modal -->
+                        <button id="open-modal-window-btn" type="button" class="btn-primary btn" data-toggle="modal"
+                                data-target="#modal-window">
+                            License conditions
+                        </button>
+                    </div>
+                    <div class="col-sm-6" -->
+                        <button id="like-it" type="button" class="btn btn-primary right" onclick="updateLikesValue()">
+                            <span id="number-of-likes" class="badge right">5</span>
+                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                            Like
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filtered list -->
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h2 id="task-table-title" class="panel-title">Personnel</h2>
+                                <div class="pull-right">
+                                <span id="task-table-open-filter-btn" class="clickable filter"
+                                      data-toggle="tooltip" title="Toggle table filter"
+                                      data-container="body">
+                                    <i class="glyphicon glyphicon-filter"></i>
+                                </span>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <input id="task-table-filter" type="text" class="form-control"
+                                       data-action="filter" data-filters="#personnel-table"
+                                       placeholder="Filter Tasks"/>
+                            </div>
+                            <table id="personnel-table" class="filtered-table">
+                                <thead>
+                                    <tr class="header">
+                                        <th>Id</th>
+                                        <th>Name</th>
+                                        <th>Department</th>
+                                        <th>Location</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mneme Hölzer</td>
+                                        <td>Administration</td>
+                                        <td>Frankfurt, Germany</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Archelaos Becke</td>
+                                        <td>Security</td>
+                                        <td>Frankfurt, Germany</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Fredric Eason</td>
+                                        <td>Planning</td>
+                                        <td>Frankfurt, Germany</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Chyna Quinn</td>
+                                        <td>Administration</td>
+                                        <td>Frankfurt, Germany</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Elin Behringer</td>
+                                        <td>Administration</td>
+                                        <td>London, UK</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Fabiola Álvarez</td>
+                                        <td>Planning</td>
+                                        <td>London, UK</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>Dazbog Agli</td>
+                                        <td>IT</td>
+                                        <td>London, UK</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>Kevyn Petri</td>
+                                        <td>Administration</td>
+                                        <td>Neapol, Italy</td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>Logan Del Olmo</td>
+                                        <td>Security</td>
+                                        <td>Neapol, Italy</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>Bertina Ferber</td>
+                                        <td>IT</td>
+                                        <td>Warsaw, Poland</td>
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>Arundhati Abbandonato</td>
+                                        <td>HR</td>
+                                        <td>Warsaw, Poland</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal dialog -->
+                <div id="modal-window" class="modal fade" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">Open source liense conditions
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </h4>
+                            </div>
+                            <div id="license-conditions" class="modal-body">
+                                Subject to the terms and conditions of this License, each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable (except as stated in this section) patent license to make, have made, use, offer to sell, sell, import, and otherwise transfer the Work, where such license applies only to those patent claims licensable by such Contributor that are necessarily infringed by their Contribution(s) alone or by combination of their Contribution(s) with the Work to which such Contribution(s) was submitted. If You institute patent litigation against any entity (including a cross-claim or counterclaim in a lawsuit) alleging that the Work or a Contribution incorporated within the Work constitutes direct or contributory patent infringement, then any patent licenses granted to You under this License for that Work shall terminate as of the date such litigation is filed.
+                                <br/><br/>
+                                <label>
+                                    <input id="accept-license-checkbox" type="checkbox"> Accept license conditions
+                                </label>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="close-btn" type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Close</button>
+                                <button id="save-btn" type="button"
+                                        class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <script src="js/filtered-list.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/general.js"></script>
+</body>
+</html>
